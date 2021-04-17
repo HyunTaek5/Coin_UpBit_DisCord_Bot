@@ -20,4 +20,9 @@ async def 시세(ctx, arg):
     except KeyError:
         await ctx.reply('다시 입력하십시오')
 
+
+@bot.command()
+async def 투자내역(ctx):
+    await ctx.reply(balance_check())
+
 bot.run(token)
