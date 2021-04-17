@@ -15,12 +15,15 @@ payload = {
 
 
 def balance_check():
+    balance = {}
     url = "https://api.upbit.com/v1/accounts"
     jwt_token = jwt.encode(payload, SECRET_KEY)
     authorize_token = 'Bearer {}'.format(jwt_token)
     headers = {"Authorization": authorize_token}
-    res = requests.get(url, headers=headers)
-    print(res.json())
+    response = requests.get(url, headers=headers)
+    for i in range(len(response.json())):
+        balance[response.json()[i]['currency']] = response.json()[i]['balance']
+    return balance
 
 
 def get_trade_price(market):
@@ -45,3 +48,4 @@ def get_all_coin():
 # 테스트용
 # get_trade_price("비트코인")
 # get_all_coin()
+# balance_check()
