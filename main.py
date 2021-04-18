@@ -1,7 +1,7 @@
 import discord
 from discord.ext import commands
 from core import get_secret
-from upBit import balance_check, get_trade_price
+from upBit import upbit_get_trade_price, upbit_balance_check
 
 token = get_secret("TOKEN_KEY")
 intents = discord.Intents.default()
@@ -16,13 +16,13 @@ async def on_ready():
 @bot.command()
 async def 시세(ctx, arg):
     try:
-        await ctx.reply(f'{get_trade_price(arg)} KRW')
+        await ctx.reply(f'{upbit_get_trade_price(arg)} KRW')
     except KeyError:
         await ctx.reply('다시 입력하십시오')
 
 
 @bot.command()
 async def 투자내역(ctx):
-    await ctx.reply(balance_check())
+    await ctx.reply(upbit_balance_check())
 
 bot.run(token)
