@@ -14,7 +14,7 @@ payload = {
 }
 
 
-def balance_check():
+def upbit_balance_check():
     balance = {}
     url = "https://api.upbit.com/v1/accounts"
     jwt_token = jwt.encode(payload, SECRET_KEY)
@@ -26,10 +26,11 @@ def balance_check():
     return balance
 
 
-def get_trade_price(market):
+def upbit_get_trade_price(market):
     url = "https://api.upbit.com/v1/candles/days"
-    coin_name = get_all_coin()
-    market = coin_name[market]
+    coin, coin_name = get_all_coin()
+    if market in coin_name:
+        market = coin[market]
     querystring = {"market": market, "count": "1"}
     response = requests.request("GET", url, params=querystring)
     return response.json()[0]['trade_price']
@@ -37,13 +38,15 @@ def get_trade_price(market):
 
 def get_all_coin():
     coin = {}
+    coin_name = []
     url = "https://api.upbit.com/v1/market/all"
     querystring = {"isDetails": "false"}
     response = requests.request("GET", url, params=querystring)
     for i in range(len(response.json())):
         if 'KRW' in response.json()[i]['market']:
             coin[response.json()[i]['korean_name']] = response.json()[i]['market']
-    return coin
+            coin_name.append(response.json()[i]['korean_name'])
+    return coin, coin_name
 
 # 테스트용
 # get_trade_price("비트코인")
