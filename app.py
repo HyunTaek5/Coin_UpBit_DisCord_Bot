@@ -1,11 +1,12 @@
 from flask import Flask
+from model.mysql import DataBase
 
 app = Flask(__name__)
 
 
-@app.route('/')
+@app.route('/coin', methods=['GET'])
 def coin_get():
-    return
+    pass
 
 
 if __name__ == '__main__':
