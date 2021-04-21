@@ -1,6 +1,6 @@
-CREATE DATABASE coin default CHARACTER SET UTF8;
+CREATE DATABASE UpBit default CHARACTER SET UTF8;
 
-use coin;
+use UpBit;
 
 CREATE TABLE coin
 (
