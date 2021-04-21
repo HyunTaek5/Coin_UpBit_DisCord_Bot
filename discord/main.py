@@ -1,7 +1,7 @@
 import discord
 from discord.ext import commands
 from core import get_secret
-from upBit import upbit_get_trade_price, upbit_balance_check
+from upbit.upBit import upbit_get_trade_price, upbit_balance_check
 
 token = get_secret("TOKEN_KEY")
 intents = discord.Intents.default()
