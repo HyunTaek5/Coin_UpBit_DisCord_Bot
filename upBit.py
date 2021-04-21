@@ -33,6 +33,7 @@ def upbit_get_trade_price(market):
         market = coin[market]
     querystring = {"market": market, "count": "1"}
     response = requests.request("GET", url, params=querystring)
+    # print(type(response.json()[0]['trade_price']))
     return response.json()[0]['trade_price']
 
 
@@ -49,6 +50,6 @@ def get_all_coin():
     return coin, coin_name
 
 # 테스트용
-# get_trade_price("비트코인")
+# upbit_get_trade_price("비트코인")
 # get_all_coin()
 # balance_check()
